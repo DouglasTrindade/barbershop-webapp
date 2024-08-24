@@ -11,6 +11,7 @@ import { BarbershopCard } from "./_components/barbershop-card";
 
 const Home = async () => {
   const barbershops = await db.barbershop.findMany({});
+  console.log(barbershops);
 
   return (
     <div>
@@ -44,7 +45,7 @@ const Home = async () => {
             <div className="flex flex-col gap-2 py-5 pl-5">
               <Badge className="w-fit">Confirmado</Badge>
               <h3 className="font-semibold">Corte de Cabelo</h3>
-              <div className="flex">
+              <div className="flex items-center gap-x-2">
                 <Avatar className="h-6 w-6">
                   <AvatarImage src="/avatar.png" />
                 </Avatar>
