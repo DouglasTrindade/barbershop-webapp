@@ -11,7 +11,11 @@ import { BarbershopCard } from "./_components/barbershop-card";
 
 const Home = async () => {
   const barbershops = await db.barbershop.findMany({});
-  console.log(barbershops);
+  const popularBarbershop = await db.barbershop.findMany({
+    orderBy: {
+      name: "desc",
+    },
+  });
 
   return (
     <div>
@@ -60,12 +64,22 @@ const Home = async () => {
           </CardContent>
         </Card>
 
-        <h2 className="mt-6 text-xs font-bold uppercase text-gray-400">
+        <h2 className="mt-6 mb-4 text-xs font-bold uppercase text-gray-400">
           Recomendados
         </h2>
         <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
           {barbershops &&
             barbershops.map((barbershop) => (
+              <BarbershopCard key={barbershop.id} barbershop={barbershop} />
+            ))}
+        </div>
+
+        <h2 className="mt-6 mb-4 text-xs font-bold uppercase text-gray-400">
+          Populares
+        </h2>
+        <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
+          {popularBarbershop &&
+            popularBarbershop.map((barbershop) => (
               <BarbershopCard key={barbershop.id} barbershop={barbershop} />
             ))}
         </div>
