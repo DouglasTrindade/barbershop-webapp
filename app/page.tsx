@@ -8,6 +8,8 @@ import { Badge } from "./_components/ui/badge";
 import { Avatar, AvatarImage } from "./_components/ui/avatar";
 import { db } from "./_lib/prisma";
 import { BarbershopCard } from "./_components/barbershop-card";
+import { Footer } from "./_components/footer";
+import { quickSearchOptions } from "./_constants/search";
 
 const Home = async () => {
   const barbershops = await db.barbershop.findMany({});
@@ -29,6 +31,20 @@ const Home = async () => {
           <Button>
             <SearchIcon />
           </Button>
+        </div>
+
+        <div className="flex gap-3 mt-6">
+          {quickSearchOptions.map((option) => (
+            <Button key={option.title} className="gap-2" variant="secondary">
+              <Image
+                src={option.imageUrl}
+                alt={option.title}
+                width={16}
+                height={16}
+              />
+              {option.title}
+            </Button>
+          ))}
         </div>
 
         <div className="relative mt-6 w-full h-[150px]">
@@ -84,6 +100,7 @@ const Home = async () => {
             ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
